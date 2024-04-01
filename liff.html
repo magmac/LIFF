@@ -14,8 +14,9 @@
             .then(() => {
                 // LIFF 初始化成功
                 liff.getProfile().then((profile) => {
-                    document.getElementById.innerHTML = profile
+                    document.getElementById('profile').innerHTML = JSON.stringify(profile)
                 })
+                document.getElementById('context').innerHTML = JSON.stringify(liff.getContext())
             })
             .catch((err) => {
                 // LIFF 初始化失敗
@@ -26,7 +27,10 @@
 </head>
 <body>
     <h1>LIFF app</h1>
-    我的資料: 
-    <div id="profile">123</div>
+    getProfile: 
+    <div id="profile"></div>
+    <br />
+    getContext: 
+    <div id="context"></div>
 </body>
 </html>
