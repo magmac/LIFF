@@ -14,7 +14,7 @@
             .then(() => {
                 // LIFF 初始化成功
                 liff.getProfile().then((profile) => {
-                    console.log(profile.displayName)
+                    document.getElementById.innerHTML = profile
                 })
             })
             .catch((err) => {
@@ -26,6 +26,7 @@
 </head>
 <body>
     <h1>LIFF app</h1>
-    <button id="openWindowButton">Open Window</button>
+    我的資料: 
+    <button id="profile"></button>
 </body>
 </html>
