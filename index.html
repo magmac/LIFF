@@ -61,11 +61,7 @@
     <button class="login-btn facebook" onclick="facebookLogin()">Login with Facebook</button>
     <button class="login-btn line" onclick="lineLogin()">Login with LINE</button>
     <br />
-    <div style="text-align: center;">
-        <div id="line" class="none">Line 登入資訊：<br /></div>
-        <div id="google" class="none">Google 登入資訊：</div>
-        <div id="facebook" class="none">Facebook 登入資訊：</div>
-    </div>
+    <div id="info" style="text-align: center;"></div>
     
 
     <script>
@@ -138,12 +134,10 @@
             var params = (new URL(location.href.replace('#', '?'))).searchParams;
             var obj = Object.fromEntries(params.entries());
             if (obj.hasOwnProperty('code')) {
-                document.getElementById('line').style.display = 'block';
-                document.getElementById('line').appendChild(JSON.stringify(obj));
+                document.getElementById('info').innerHTML = `Line 登入資訊：<br />${JSON.stringify(obj)}`;
             }
             else if (obj.hasOwnProperty('token_type')) {
-                document.getElementById('google').style.display = 'block';
-                document.getElementById('google').appendChild(JSON.stringify(obj));
+                document.getElementById('info').innerHTML = `google 登入資訊：<br />${JSON.stringify(obj)}`;
             }
             else return
         }
