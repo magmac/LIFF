@@ -136,8 +136,9 @@
         function queryToObject () {
             var params = (new URL(location.href.replace('#', '?'))).searchParams;
             var obj = Object.fromEntries(params.entries());
-            if (obj.indexOf('code')) document.getElementById('line').style.display = 'block';
-            else if (obj.indexOf('token_type')) document.getElementById('google').style.display = 'block';
+            console.log(obj)
+            if (obj.indexOf('code') > 0) document.getElementById('line').style.display = 'block';
+            else if (obj.indexOf('token_type') > 0) document.getElementById('google').style.display = 'block';
             else return
         }
 
