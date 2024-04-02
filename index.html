@@ -136,9 +136,14 @@
         function queryToObject () {
             var params = (new URL(location.href.replace('#', '?'))).searchParams;
             var obj = Object.fromEntries(params.entries());
-            console.log(obj)
-            if (obj.hasOwnProperty('code')) document.getElementById('line').style.display = 'block';
-            else if (obj.hasOwnProperty('token_type')) document.getElementById('google').style.display = 'block';
+            if (obj.hasOwnProperty('code')) {
+                document.getElementById('line').style.display = 'block';
+                document.getElementById('line').innerText = JSON.stringify(obj);
+            }
+            else if (obj.hasOwnProperty('token_type')) {
+                document.getElementById('google').style.display = 'block';
+                document.getElementById('google').innerText = JSON.stringify(obj);
+            }
             else return
         }
 
