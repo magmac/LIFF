@@ -61,7 +61,9 @@
 
     <script>
         // Google 登入
-        function onSignIn() {
+        function onSignIn(p) {
+            console.log(123)
+            console.log(p)
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
