@@ -40,67 +40,34 @@
 <head>
     <title>加官方帳號好友</title>
     <!-- 引入 LIFF SDK -->
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
     <h1>加官方帳號好友</h1>
-    <!-- 按鈕，點擊後觸發加好友的操作 -->
-    <button id="addFriendButton">加官方帳號好友</button>
+    <!-- 按鈕，點擊後跳轉至官方帳號頁面 -->
+    <button id="addFriendButton" onclick="navigateToOfficialAccount()">加好友</button>
 
     <script>
         // 初始化 LIFF
         function initializeLiff() {
-            liff.init({ liffId: "2004451039-OLPv2Aa1" }, function (data) {
+            liff.init({ liffId: '2004451039-OLPv2Aa1' }, function (data) {
                 console.log('LIFF 初始化完成');
             }, function (err) {
                 console.error('初始化 LIFF 時發生錯誤', err);
             });
         }
 
-        // 加官方帳號好友的操作
-        function addOfficialAccount() {
-            // 使用 LINE Messaging API 發送好友邀請
-            liff.sendMessages([
-                {
-                    "type": "text",
-                    "text": "請加入官方帳號為好友。"
-                },
-                {
-                    "type": "flex",
-                    "altText": "官方帳號名片",
-                    "contents": {
-                        "type": "bubble",
-                        "body": {
-                            "type": "box",
-                            "layout": "vertical",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "官方帳號名片",
-                                    "weight": "bold",
-                                    "size": "xl"
-                                },
-                                {
-                                    "type": "text",
-                                    "text": "官方帳號資訊",
-                                    "size": "sm",
-                                    "wrap": true
-                                }
-                            ]
-                        }
-                    }
-                }
-            ], function () {
-                console.log('好友邀請已發送');
-            }, function (err) {
-                console.error('發送好友邀請時發生錯誤', err);
+        // 導航至官方帳號頁面
+        function navigateToOfficialAccount() {
+            liff.openWindow({
+                url: 'https://line.me/ti/p/~magmac',
+                external: true
             });
         }
 
         // 網頁載入完成後執行初始化 LIFF
         window.onload = function () {
             initializeLiff();
-            document.getElementById('addFriendButton').addEventListener('click', addOfficialAccount);
         };
     </script>
 </body>
