@@ -53,9 +53,9 @@
 <body>
     <h1>登入</h1>
     <br />
-    <!-- <button class="login-btn google" id="google" onclick="googleLogin()">Login with Google</button> -->
+    <button class="login-btn google" id="google" onclick="googleLogin()">Login with Google</button>
     <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-    <div class="google" id="google">Login with Google</div>
+    <!-- <div class="google" id="google">Login with Google</div> -->
     <button class="login-btn facebook" id="facebook" onclick="facebookLogin()">Login with Facebook</button>
     <button class="login-btn line" id="line" onclick="lineLogin()">Login with LINE</button>
 
@@ -69,6 +69,20 @@
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+
+        function googleLogin () {
+            // Google OAuth 2.0 客戶端 ID
+            const clientId = '612299588834-lvetj3bjvfbtpbdcpr6iuau210ip5odd.apps.googleusercontent.com';
+            // Google 登入後重定向的 URI
+            const redirectUri = 'https://magmac.github.io/LIFF/';
+            // 登入時要求的授權範圍，例如：profile 和 email
+            const scope = 'profile email';
+            // Google 登入頁面的 URL
+            const googleLoginUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}&prompt=select_account`;
+
+            // 導向 Google 登入頁面
+            window.location.href = googleLoginUrl;
         }
 
         // Facebook 登入
@@ -114,7 +128,6 @@
         // 網頁載入完成後執行初始化 LIFF
         window.onload = function () {
             initializeLiff();
-            initialGoogle();
         };
     </script>
 </body>
