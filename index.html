@@ -60,6 +60,27 @@
     <button class="login-btn line" id="line" onclick="lineLogin()">Login with LINE</button>
 
     <script>
+        // Google 登入
+        function onSignIn() {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+
+        // Facebook 登入
+        function facebookLogin() {
+            // TODO: Redirect to Facebook login page
+            alert('Redirecting to Facebook login page...');
+        }
+
+        // LINE 登入
+        function lineLogin() {
+            // TODO: Redirect to LINE login page
+            liff.login(); 
+        }
+
         // 初始化 google 
         function initialGoogle() {
             gapi.load('auth2', function() {
@@ -86,27 +107,6 @@
             }, function (err) {
                 console.error('初始化 LIFF 時發生錯誤', err);
             });
-        }
-
-        // Google 登入
-        function onSignIn() {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        }
-
-        // Facebook 登入
-        function facebookLogin() {
-            // TODO: Redirect to Facebook login page
-            alert('Redirecting to Facebook login page...');
-        }
-
-        // LINE 登入
-        function lineLogin() {
-            // TODO: Redirect to LINE login page
-            liff.login(); 
         }
 
         // 網頁載入完成後執行初始化 LIFF
