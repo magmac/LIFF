@@ -1,0 +1,86 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIFF app</title>
+    <script src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+    <script>
+        window.onload = function () {
+            // 初始化 LIFF
+            liff.init({
+                liffId: '2004451039-OLPv2Aa1' // 填入你的 LIFF App ID
+            })
+            .then(() => {
+                // LIFF 初始化成功
+                liff.getProfile().then((profile) => {
+                    document.getElementById('profile').innerHTML = JSON.stringify(profile)
+                })
+                document.getElementById('context').innerHTML = JSON.stringify(liff.getContext())
+            })
+            .catch((err) => {
+                // LIFF 初始化失敗
+                console.error('LIFF initialization failed', err);
+            });
+        };
+    </script>
+</head>
+<body>
+    <h1>LIFF app</h1>
+    getProfile: 
+    <div id="profile"></div>
+    <br />
+    getContext: 
+    <div id="context"></div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>加官方帳號好友</title>
+    <!-- 引入 LIFF SDK -->
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+</head>
+<body>
+    <h1>加官方帳號好友</h1>
+    <!-- 按鈕，點擊後觸發加好友的操作 -->
+    <p id="loginStatus">正在檢查登入狀態...</p>
+
+    <script>
+        // 初始化 LIFF
+        function initializeLiff() {
+            liff.init({ liffId: "2004451039-OLPv2Aa1" }, function (data) {
+                console.log('LIFF 初始化完成');
+                checkLoginStatus(); // 初始化後檢查登入狀態
+            }, function (err) {
+                console.error('初始化 LIFF 時發生錯誤', err);
+            });
+        }
+
+        function openAddFriendWindow() {
+            liff.openWindow({
+                url: 'https://liff.line.me/1645278921-kWRPP32q/?accountId=fzl8376a', // 請將 @官方帳號ID 替換為您的官方帳號 ID
+                external: false
+            });
+        }
+
+        // 檢查用戶是否已登入
+        function checkLoginStatus() {
+            if (liff.isLoggedIn()) {
+                document.getElementById('loginStatus').innerText = '已登入LINE應用程式';
+                // openAddFriendWindow()
+            } else {
+                document.getElementById('loginStatus').innerText = '尚未登入LINE應用程式';
+                // liff.login(); // 若尚未登入，則提示用戶登入
+            }
+        }
+
+        // 網頁載入完成後執行初始化 LIFF
+        window.onload = function () {
+            initializeLiff();
+        };
+    </script>
+</body>
+</html>
+
