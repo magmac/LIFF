@@ -61,9 +61,11 @@
     <button class="login-btn facebook" onclick="facebookLogin()">Login with Facebook</button>
     <button class="login-btn line" onclick="lineLogin()">Login with LINE</button>
     <br />
-    <div id="line" class="none">Line 登入資訊：<br /></div>
-    <div id="google" class="none">Google 登入資訊：</div>
-    <div id="facebook" class="none">Facebook 登入資訊：</div>
+    <div style="text-align: center;">
+        <div id="line" class="none">Line 登入資訊：<br /></div>
+        <div id="google" class="none">Google 登入資訊：</div>
+        <div id="facebook" class="none">Facebook 登入資訊：</div>
+    </div>
     
 
     <script>
@@ -115,7 +117,6 @@
                     //scope: 'additional_scope'
                 });
                 window.gapi.signin2.render('google', {
-                    scope: 'profile email',
                     longtitle: true,
                     theme: 'light',
                     onsuccess: onSignIn,
@@ -138,11 +139,11 @@
             var obj = Object.fromEntries(params.entries());
             if (obj.hasOwnProperty('code')) {
                 document.getElementById('line').style.display = 'block';
-                document.getElementById('line').innerText = JSON.stringify(obj);
+                document.getElementById('line').appendChild(JSON.stringify(obj));
             }
             else if (obj.hasOwnProperty('token_type')) {
                 document.getElementById('google').style.display = 'block';
-                document.getElementById('google').innerText = JSON.stringify(obj);
+                document.getElementById('google').appendChild(JSON.stringify(obj));
             }
             else return
         }
