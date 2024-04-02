@@ -48,16 +48,23 @@
         .line {
             background-color: #00c202;
         }
+
+        .none {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1>登入</h1>
     <br />
-    <button class="login-btn google" id="google" onclick="googleLogin()">Login with Google</button>
-    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-    <!-- <div class="google" id="google">Login with Google</div> -->
-    <button class="login-btn facebook" id="facebook" onclick="facebookLogin()">Login with Facebook</button>
-    <button class="login-btn line" id="line" onclick="lineLogin()">Login with LINE</button>
+    <button class="login-btn google" onclick="googleLogin()">Login with Google</button>
+    <button class="login-btn facebook" onclick="facebookLogin()">Login with Facebook</button>
+    <button class="login-btn line" onclick="lineLogin()">Login with LINE</button>
+    <br />
+    <div id="line" class="none">Line 登入資訊：<br /></div>
+    <div id="google" class="none">Google 登入資訊：</div>
+    <div id="facebook" class="none">Facebook 登入資訊：</div>
+    
 
     <script>
         // Google 登入
@@ -124,10 +131,20 @@
                 console.error('初始化 LIFF 時發生錯誤', err);
             });
         }
+        
+        // get query string to object
+        function queryToObject () {
+            var params = (new URL(location.href.replace('#', '?'))).searchParams;
+            var obj = Object.fromEntries(params.entries());
+            if (obj.indexOf('code')) document.getElementById('line').style.display = 'block';
+            else if (obj.indexOf('token_type')) document.getElementById('google').style.display = 'block';
+            else return
+        }
 
         // 網頁載入完成後執行初始化 LIFF
         window.onload = function () {
             initializeLiff();
+
         };
     </script>
 </body>
