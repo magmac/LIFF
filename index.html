@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-signin-client_id" content="612299588834-lvetj3bjvfbtpbdcpr6iuau210ip5odd.apps.googleusercontent.com">
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
     <script charset="utf-8" src="https://apis.google.com/js/platform.js" async defer></script>
     <title>登入頁</title>
@@ -55,8 +54,8 @@
     <h1>登入</h1>
     <br />
     <!-- <button class="login-btn google" id="google" onclick="googleLogin()">Login with Google</button> -->
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <!-- <div class="login-btn google g-signin2" data-onsuccess="onSignIn">Login with Google</div> -->
+    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+    <div class="google" id="google">Login with Google</div>
     <button class="login-btn facebook" id="facebook" onclick="facebookLogin()">Login with Facebook</button>
     <button class="login-btn line" id="line" onclick="lineLogin()">Login with LINE</button>
 
@@ -65,13 +64,18 @@
         function initialGoogle() {
             gapi.load('auth2', function() {
                 // Retrieve the singleton for the GoogleAuth library and set up the client.
-                auth2 = gapi.auth2.init({
+                gapi.auth2.init({
                     client_id: '612299588834-lvetj3bjvfbtpbdcpr6iuau210ip5odd.apps.googleusercontent.com',
                     cookiepolicy: 'single_host_origin',
                     // Request scopes in addition to 'profile' and 'email'
                     //scope: 'additional_scope'
                 });
-                attachSignin(document.getElementById('customBtn'));
+                window.gapi.signin2.render('google', {
+                    scope: 'profile email',
+                    longtitle: true,
+                    theme: 'light',
+                    onsuccess: onSignIn,
+                })
             });
         }
 
@@ -108,6 +112,7 @@
         // 網頁載入完成後執行初始化 LIFF
         window.onload = function () {
             initializeLiff();
+            initialGoogle();
         };
     </script>
 </body>
